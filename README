@@ -1,0 +1,20 @@
+acme-gazo.pl - 指定された URI 中の直リン画像を IRC のチャネルに流し込む
+
+Copyright(C) Sharl Morlaroll <sharl@hauN.org>
+
+* License - Perl/Artistic
+
+* Setup
+
+1. Write to ~/.acme-gazo
+
+	[defaults]
+	server   = localhost
+	port     = 6667
+	channel  = #gazo
+	nick     = nick
+	password = password
+
+2. Let's try!
+
+	$ acme-gazo.pl http://www.example.com/gazo/68060/
