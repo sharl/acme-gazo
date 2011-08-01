@@ -25,9 +25,9 @@ if ($#ARGV != 0 || ! $opt || $ARGV[0] !~ m|^https?://|o) {
     print STDERR "usage: " . basename($0) . " [--file <config file>] [--channel <channel>] <URL>\n";
     exit 1;
 }
-my $URI = $ARGV[0];
 my $config = ReadINI($cfile);
-my $channel ||= $config->{defaults}{channel};
+my $URI = $ARGV[0];
+my $CHANNEL = $channel ? $channel : $config->{defaults}{channel};
 
 my $scr = scraper {
     process 'a', 'href[]' => sub {
@@ -47,9 +47,9 @@ my $conn = $irc->newconn(
 sub on_connect {
     my $self = shift;
 
-    $self->join($channel);
+    $self->join($CHANNEL);
     foreach my $jpg (@{$jpgs}) {
-	$self->privmsg($channel, $jpg);
+	$self->privmsg($CHANNEL, $jpg);
 	sleep(1);
     }
     exit;
